@@ -65,7 +65,7 @@ const Carousel = () => {
   }
 
   return (
-    <div className='w-full max-w-[1800px] h-[480px] m-auto py-4 px-4 relative group'>
+    <div className='w-full h-[480px] m-auto py-4 relative group'>
       <div style={{ backgroundImage: `url(${imgArray[currentIndex].image})` }} className='w-full relative h-full rounded-2xl bg-center bg-cover duration-500'>
         <div className='flex flex-col justify-center items-center top-0 left-0 z-10 absolute w-full h-full bg-gray-600/60 rounded-2xl'>
           <div className='text-2xl font-bold text-white'>{imgArray[currentIndex].name}</div>

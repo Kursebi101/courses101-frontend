@@ -50,7 +50,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div className='p-4 rounded-2xl border border-[1px] w-1/4'>
+    <div className='p-4 rounded-2xl border-[1px] w-1/6'>
       <h2 className='font-semibold mb-4'>ფილტრი</h2>
 
       <div className='mb-4'>
