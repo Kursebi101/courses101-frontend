@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import generalService from '../../services/general.service'
+import generalService from '../services/general.service'
 
 const initialGeneralData = {
   loading: false,
@@ -28,7 +28,6 @@ export const GeneralProvider = ({ children }) => {
 
   useEffect(() => {
     if (alertData) {
-      console.log(alertData, ' [INCOMING ALERT DATA]')
       setTimeout(() => {
         setAlertData(null);
       }, 3000);

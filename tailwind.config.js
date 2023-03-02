@@ -8,6 +8,9 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      height: {
+        "content-height": 'calc(100vh - 252px)'
+      }
     },
   },
   plugins: [

@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import Logo from '../../assets/imgs/Logo.png';
 
-import { useGeneral } from '../../components/Contexts/GeneralProvider';
-import { useAuth } from '../../components/Contexts/AuthProvider';
+import { useGeneral } from '../../Contexts/GeneralProvider';
+import { useAuth } from '../../Contexts/AuthProvider';
 
 import userService from '../../services/user.service';
 
@@ -44,7 +44,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[#f9fafb]">
+    <div className="flex h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[#f9fafb]">
       <div className="w-fit max-w-md space-y-8">
         <div>
           <img

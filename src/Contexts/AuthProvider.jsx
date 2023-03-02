@@ -1,12 +1,13 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import userService from '../../services/user.service';
+import userService from '../services/user.service'
 
 const initialAuthData = {
   login: () => { },
   logout: () => { },
   user: {
     username: '',
-    avatar: ''
+    avatar: '',
+    roleType: 1
   }
 }
 
@@ -35,7 +36,6 @@ export const AuthProvider = ({ children }) => {
     if(!access_token) return;
 
     let result = await userService.getUser();
-
     if (result.data.code === 'user/found') {
       setUser(result.data.data);
     }

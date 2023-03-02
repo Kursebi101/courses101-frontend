@@ -13,12 +13,11 @@ const Footer = () => {
       <div className='flex flex-row items-center justify-between w-full sm:px-6 lg:px-16'>
         <span className='text-white text-xs'>© 2023 Kursebi.ge, Inc. All rights reserved.</span>
 
-        <div className='flex flex-row gap-4 items-center'>
+        <div className='flex flex-row gap-2 md:gap-4 items-center'>
           <img className='cursor-pointer' src={FacebookIco} alt='Facebook' width={28} height={28} />
           <img className='cursor-pointer' src={InstagramIco} alt='Facebook' width={28} height={28} />
           <img className='cursor-pointer' src={TwitterIco} alt='Facebook' width={28} height={28} />
           <img className='cursor-pointer' src={YoutubeIco} alt='Facebook' width={28} height={28} />
-          <img className='cursor-pointer' src={GithubIco} alt='Facebook' width={28} height={28} />
         </div>
       </div>
     </Disclosure>

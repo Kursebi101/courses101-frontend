@@ -5,7 +5,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import Logo from '../../assets/imgs/Logo.png';
-import { useAuth } from '../Contexts/AuthProvider';
+import { useAuth } from '../../Contexts/AuthProvider';
 
 const navigation = [
   { name: 'მთავარი', href: '/', current: true },
@@ -123,6 +123,16 @@ const Header = () => {
                           </NavLink>
                         )}
                       </Menu.Item>
+                      {user?.roleType === 0 && <Menu.Item>
+                        {({ active }) => (
+                          <NavLink
+                            to="/panel"
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                            ადმინ პანელი
+                          </NavLink>
+                        )}
+                      </Menu.Item>}
                       <Menu.Item>
                         {({ active }) => (
                           <NavLink

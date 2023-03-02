@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useGeneral } from '../Contexts/GeneralProvider';
+import { useGeneral } from '../../Contexts/GeneralProvider';
 
 const Sidebar = () => {
   const { formats, categories, loading, toggleLoading } = useGeneral();
@@ -50,7 +50,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div className='p-4 rounded-2xl border-[1px] w-1/6'>
+    <div className='p-4 rounded-2xl border-[1px] w-full md:w-1/6'>
       <h2 className='font-semibold mb-4'>ფილტრი</h2>
 
       <div className='mb-4'>
