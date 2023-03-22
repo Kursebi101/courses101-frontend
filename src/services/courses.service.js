@@ -3,7 +3,7 @@ import httpService from './httpClient.service';
 const coursesService = {
 
   async getCourses() {
-    return await httpService.get('/courses',);
+    return await httpService.get('/courses');
   },
 
   async createCourse(courseObj) {
