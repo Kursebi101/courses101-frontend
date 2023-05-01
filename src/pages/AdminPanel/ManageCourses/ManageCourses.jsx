@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import CoursesModal from '../Modals/CoursesModal/CoursesModal'
+import CoursesModal from '../../../components/Modals/Course';
 
-const ManageCoursesPage = () => {
+const ManageCourses = () => {
   const [modalOpen, toggleModalOpen] = useState(false)
 
   const handleClose = (e) => {
@@ -22,4 +22,4 @@ const ManageCoursesPage = () => {
   )
 }
 
-export default ManageCoursesPage
+export default ManageCourses

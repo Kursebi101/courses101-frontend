@@ -13,11 +13,11 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import CatalogPage from './pages/HomePage/CatalogPage';
-import AdminPage from './pages/AdminPage';
-import ManageCoursesPage from './pages/AdminPage/ManageCoursesPage/ManageCoursesPage';
-import ManageCategoriesPage from './pages/AdminPage/ManageCategoriesPage';
-import ManageRolesPage from './pages/AdminPage/ManageRolesPage';
-
+import AdminPage from './pages/AdminPanel';
+import ManageCourses from './pages/AdminPanel/ManageCourses/ManageCourses';
+import ManageCategories from './pages/AdminPanel/ManageCategories';
+import ManageRolesPage from './pages/AdminPanel/ManageRoles';
+import ManageAcademiesPage from './pages/AdminPanel/ManageAcademies';
 
 const router = createBrowserRouter([
   {
@@ -43,15 +43,19 @@ const router = createBrowserRouter([
             children: [
               {
                 path: '',
-                element: <ManageCoursesPage />
+                element: <ManageCourses />
               },
               {
                 path: '/panel/categories',
-                element: <ManageCategoriesPage />
+                element: <ManageCategories />
               },
               {
                 path: '/panel/roles',
                 element: <ManageRolesPage />
+              },
+              {
+                path: '/panel/academies',
+                element: <ManageAcademiesPage />
               }
             ]
           },

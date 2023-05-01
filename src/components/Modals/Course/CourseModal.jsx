@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useGeneral } from '../../../../Contexts/GeneralProvider';
-import coursesService from '../../../../services/courses.service';
+import { useGeneral } from '../../../Contexts/GeneralProvider';
+import coursesService from '../../../services/courses.service';
 
 const initialOpenModals = {
   formatDrop: false,
@@ -47,7 +47,7 @@ const initialCourseObj = {
   startMonth: 'მარტი',
 }
 
-const CoursesModal = ({ onClose }) => {
+const CourseModal = ({ onClose }) => {
   const { roles, formats, categories, setAlertData } = useGeneral()
   const navigate = useNavigate()
 
@@ -212,4 +212,4 @@ const CoursesModal = ({ onClose }) => {
   )
 }
 
-export default CoursesModal
+export default CourseModal
