@@ -19,6 +19,8 @@ export const GeneralProvider = ({ children }) => {
   const [roles, setRoles] = useState([]);
   const [formats, setFormats] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [academies, setAcademies] = useState([]);
+  const [lectors, setLectors] = useState([]);
   const [alertData, setAlertData] = useState(null);
   const [loading, toggleLoading] = useState(false);
 
@@ -46,7 +48,7 @@ export const GeneralProvider = ({ children }) => {
 
   const handleGetFormats = async () => {
     let result = await generalService.getFormats();
-
+    console.log(result, '[FORMATS]')
     if (result.data.code === 'format/not_found') {
       setAlertData({ type: 1, details: result.data.message });
     }
@@ -64,10 +66,32 @@ export const GeneralProvider = ({ children }) => {
     setCategories(result.data.data);
   }
 
+  const handleGetAcademies = async () => {
+    let result = await generalService.getAcademies();
+
+    if (result.data.code === 'academies/not_found') {
+      setAlertData({ type: 1, details: result.data.message });
+    }
+
+    setAcademies(result.data.data);
+  }
+
+  const handleGetLectors = async () => {
+    let result = await generalService.getLectors();
+
+    if (result.data.code === 'lectors/not_found') {
+      setAlertData({ type: 1, details: result.data.message });
+    }
+
+    setLectors(result.data.data);
+  }
+
   const handleGetData = async () => {
     await handleGetRoles();
     await handleGetCategories();
     await handleGetFormats();
+    await handleGetAcademies();
+    await handleGetLectors();
   }
 
   const value = useMemo(
@@ -77,11 +101,13 @@ export const GeneralProvider = ({ children }) => {
       roles,
       formats,
       categories,
+      academies,
+      lectors,
       handleGetData,
       setAlertData,
       toggleLoading
     }),
-    [loading, alertData, roles, formats, categories]
+    [loading, alertData, roles, formats, categories, academies, lectors]
   )
 
   return <GeneralContext.Provider value={value}>{children}</GeneralContext.Provider>

@@ -25,13 +25,9 @@ const initialCourseObj = {
   hasCertificate: false,
   price: 0,
   academy: {
-    id: '0',
-    name: 'Natro Academy'
+    _id: '0',
   },
-  lecturer: {
-    id: '0',
-    name: 'The Natro'
-  },
+  lectors: [],
   groupSchedule: [
     {
       groupName: 'ჯგუფი 1',
@@ -48,8 +44,9 @@ const initialCourseObj = {
 }
 
 const CourseModal = ({ onClose }) => {
-  const { roles, formats, categories, setAlertData } = useGeneral()
-  const navigate = useNavigate()
+  const { formats, categories, academies, lectors, setAlertData } = useGeneral()
+
+  console.log(academies, '[ACADS]')
 
   const [openModal, toggleOpenModal] = useState(initialOpenModals)
   const [courseObj, setCourseObj] = useState(initialCourseObj)
@@ -74,18 +71,18 @@ const CourseModal = ({ onClose }) => {
   }
 
   const handleSubmit = async () => {
-    const objToSave = {...courseObj};
+    const objToSave = { ...courseObj };
 
     objToSave.duration = `${objToSave.duration_hour} სთ. ${objToSave.duration_minutes} წთ.`
 
     let result = await coursesService.createCourse(objToSave);
 
     let response_type = result.data.code === 'course/created' ? 0 : 1;
-    
+
     setAlertData({ type: response_type, details: result.data.message });
 
-    if(result.data.code === 'course/created') onClose();
-    
+    if (result.data.code === 'course/created') onClose();
+
     // toggleLoading(false);
     // if (response_type === 0) navigate('/login');
   }
@@ -201,6 +198,52 @@ const CourseModal = ({ onClose }) => {
             required
             className="mt-1 relative block w-full appearance-none rounded border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
           />
+        </div>
+
+        <div className='my-2'>
+          <label htmlFor="role-type" className="text-sm font-semibold text-gray-400">
+            აკადემია
+          </label>
+          <div
+            onClick={() => handleModalOpen('academy')}
+            className="flex flex-row h-[38px] mt-1 relative cursor-pointer items-center w-full appearance-none rounded border border-gray-300 px-4 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+          >
+            {/* TODO: Return Academy Name */}
+            <div className='z-20 w-full mr-4'>{courseObj.category.name}</div>
+            <svg className="w-4 h-4 ml-2 absolute right-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+            <div className={`${openModal.academy ? 'flex' : 'hidden'} flex-col z-30 absolute top-full left-0 w-full bg-white rounded border border-gray-300`}>
+              {
+                academies.map(academy => (
+                  <button onClick={() => handleChange('academy', academy)} type='button' className='p-2 w-full hover:bg-indigo-600 hover:text-white rounded transition'>
+                    {academy.academyName}
+                  </button>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <div className='my-2'>
+          <label htmlFor="role-type" className="text-sm font-semibold text-gray-400">
+            ლექტორი
+          </label>
+          <div
+            onClick={() => handleModalOpen('lectors')}
+            className="flex flex-row h-[38px] mt-1 relative cursor-pointer items-center w-full appearance-none rounded border border-gray-300 px-4 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+          >
+            {/* RETURN LECTORS NAMES and AVATARS */}
+            <div className='z-20 w-full mr-4'>{courseObj.category.lectors}</div>
+            <svg className="w-4 h-4 ml-2 absolute right-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+            <div className={`${openModal.lectors ? 'flex' : 'hidden'} flex-col z-30 absolute top-full left-0 w-full bg-white rounded border border-gray-300`}>
+              {
+                lectors.map(lector => (
+                  <button onClick={() => handleChange('lector', lector)} type='button' className='p-2 w-full hover:bg-indigo-600 hover:text-white rounded transition'>
+                    {lector.firstName} ${lector.lastName}
+                  </button>
+                ))
+              }
+            </div>
+          </div>
         </div>
 
         <div className='flex flex-row items-center justify-between mt-4'>

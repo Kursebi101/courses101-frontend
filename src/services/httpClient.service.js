@@ -2,8 +2,7 @@ import axios from 'axios';
 
 
 const h_axios = axios.create({
-  // baseURL: 'https://api.kursebi.com/api',
-  baseURL: 'http://localhost:3001/api',
+  baseURL: process.env.REACT_APP_BACKEND_URL,
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',

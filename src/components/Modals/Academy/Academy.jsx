@@ -1,15 +1,7 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { useGeneral } from '../../../Contexts/GeneralProvider';
+import { useState } from 'react'
 import academiesService from '../../../services/academies.service';
+import { useGeneral } from '../../../Contexts/GeneralProvider';
 
-const initialOpenModals = {
-  formatDrop: false,
-  categoryDrop: false,
-  certificateDrop: false,
-  academyDrop: false,
-  lecturerDrop: false,
-};
 
 const initialAcademyObj = {
   academyName: "",
@@ -24,7 +16,31 @@ const initialLectorObj = {
   avatar: null
 }
 
+function createFormData(academyObj) {
+  const formData = new FormData();
+  formData.append('academyName', academyObj.academyName);
+  formData.append('description', academyObj.description);
+
+  if (academyObj.logo) {
+    formData.append('logo', academyObj.logo);
+  }
+
+  academyObj.lectors.forEach((lector, index) => {
+    formData.append(`lectors[${index}][firstName]`, lector.firstName);
+    formData.append(`lectors[${index}][lastName]`, lector.lastName);
+
+    if (lector.avatar) {
+      formData.append('avatar', lector.avatar, `avatar-${index}`);
+    }
+  });
+
+  formData.append('lectorsCount', academyObj.lectors.length);
+
+  return formData;
+}
+
 const AcademyModal = ({ onClose }) => {
+  const { setMessage } = useGeneral();
   const [academyObj, setAcademyObj] = useState(initialAcademyObj)
 
   const handleChange = (e) => {
@@ -60,8 +76,13 @@ const AcademyModal = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(academyObj, '[OBJECT]');
 
+    let formData = createFormData(academyObj);
+    let result = await academiesService.createAcademy(formData);
+    if (result.status === 201) {
+      setMessage(result.message)
+      onClose();
+    }
   }
 
   return (

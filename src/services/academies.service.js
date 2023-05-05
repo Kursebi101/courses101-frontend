@@ -7,7 +7,12 @@ const academiesService = {
   },
 
   async createAcademy(academyObj) {
-    return await httpService.post('/academies', academyObj);
+    return await httpService.post('/academies', academyObj,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
   },
 
   async updateAcademy(academyObj) {
